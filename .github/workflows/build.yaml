@@ -18,3 +18,12 @@ jobs:
             registry: docker.io
             repository: etiennebenech/cd
             tag_with_sha: true
+        - name: Run Trivy vulnerability scanner
+          uses: aquasecurity/trivy-action@master
+          with:
+            image-ref: 'docker.io/<your-username>/<your-image>:${{ github.sha }}'
+            format: 'table'
+            exit-code: '1'
+            ignore-unfixed: true
+            vuln-type: 'os,library'
+            severity: 'CRITICAL,HIGH'
