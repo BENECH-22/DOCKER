@@ -1,10 +1,9 @@
-
 const http = require('http');
 const fs = require('fs');
 const os = require('os');
 
 // Get the greeting from the "GREETING" environment variable, or use a default value
-const greeting = process.env.GREETING || 'Hello ITII';
+const greeting = process.env.GREETING || 'Hello ITII!';
 
 // Get the file path from the "FILE_PATH" environment variable, or use a default value
 const filePath = process.env.FILE_PATH || '/var/secret/secret.txt';
@@ -28,7 +27,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const port = 3000;
+const port = 3001;
 
 server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
@@ -55,23 +54,9 @@ process.on('SIGTERM', () => {
 
 spec:
 containers:
-- image: mywebserver:1.1
+- image: mywebserver:1.0
   imagePullPolicy: IfNotPresent
   name: webserver
   env:
   - name: GREETING
     value: "I'm configured now"
-
-containers: # exists already
-- image: mywebserver:1.1 # exists already
-  imagePullPolicy: IfNotPresent # exists already
-  name: webserver # exists already
-  volumeMounts:
-  - name: webserver-secret # References the name of the volume specified below
-    mountPath: "/var/secret"
-    readOnly: true
-volumes:
-- name: webserver-secret
-  secret:
-    secretName: webserver-secret # References the secret name from step 1
-    optional: false
