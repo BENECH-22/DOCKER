@@ -51,12 +51,3 @@ process.on('SIGTERM', () => {
     process.exit(0);
   });
 });
-
-spec:
-containers:
-- image: mywebserver:1.0
-  imagePullPolicy: IfNotPresent
-  name: webserver
-  env:
-  - name: GREETING
-    value: "I'm configured now"
