@@ -21,7 +21,7 @@ jobs:
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: 'docker.io/etiennebenech/cd:${{ github.sha }}'
+            image-ref: 'docker.io/etiennebenech/cd:ca6003c6ebe81e3e71591b6ac4e741c35fd26788e09b944587dc7be84521dbe6.sha'
             format: 'table'
             exit-code: '1'
             ignore-unfixed: true
